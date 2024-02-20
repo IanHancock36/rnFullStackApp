@@ -5,6 +5,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import DailyChallengeScreen from '../Screens/DailyChallengeScreen';
 import ProfileScreen from '../Screens/ProfileScreen';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import {Button} from 'react-native';
 
 export type RootParamsList = {
   HomeScreen: undefined;
@@ -34,7 +35,11 @@ export type ProfileScreenNavigationProp = BottomTabNavigationProp<
 export interface ProfileScreenProps {
   navigation: ProfileScreenNavigationProp;
 }
-
+// WIP 
+const ProfileHeaderButton = ({navigation}: ProfileScreenProps) => (
+  <Button onPress={() => navigation.goBack()} />
+);
+// WIP 
 const HomeStack = createBottomTabNavigator<RootParamsList>();
 
 const RootNavigation = () => {
@@ -46,7 +51,15 @@ const RootNavigation = () => {
           name="DailyChallenges"
           component={DailyChallengeScreen}
         />
-        <HomeStack.Screen name="Profile" component={ProfileScreen} />
+        <HomeStack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          // WIP 
+          options={({navigation}) => ({
+            headerLeft: () => <ProfileHeaderButton navigation={navigation} />,
+          })}
+           // WIP 
+        />
       </HomeStack.Navigator>
     </NavigationContainer>
   );
